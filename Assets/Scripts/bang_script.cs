@@ -6,17 +6,18 @@ public class bang_script : MonoBehaviour {
     public GameObject bang;
     public Vector3 spawn_position;
     float timer = 0.0f;
+    float wait_time;
 
 	// Use this for initialization
 	void Start () {
-
+        wait_time = Random.Range(3.0f, 20.0f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         timer += Time.deltaTime;
 
-        if (timer > 5)
+        if (timer > wait_time)
         {
             Instantiate(bang, spawn_position, Quaternion.identity);
         }
