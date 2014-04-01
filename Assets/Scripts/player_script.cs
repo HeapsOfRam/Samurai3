@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class bang_script : MonoBehaviour {
+public class player_script : MonoBehaviour {
 
     public GameObject bang, samurai, enemy;
     private GameObject bang_clone, samurai_clone, enemy_clone;
@@ -38,7 +38,11 @@ public class bang_script : MonoBehaviour {
 
     void enemy_win()
     {
-
+        samurai_corpse_clone = (GameObject)Instantiate(samurai_corpse, samurai_corpse_position, Quaternion.identity);
+        enemy_victor_clone = (GameObject)Instantiate(enemy_victor, enemy_victor_position, Quaternion.identity);
+        Destroy(samurai_clone);
+        Destroy(enemy_clone);
+        //Application.LoadLevel(game_over);
     }
 
     void player_win()
