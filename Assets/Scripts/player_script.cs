@@ -11,11 +11,16 @@ public class player_script : MonoBehaviour {
     public Vector3 samurai_victor_position, samurai_corpse_position, enemy_victor_position, enemy_corpse_position;
     public float enemy_reaction;
     public int next_level;
+    private int next_load;
+    private const int LOAD_OVER = 2;
     float spawn_timer = 0.0f;
     float reaction_timer = 0.0f;
     float wait_time;
+    private float load_wait_timer = 0.0f;
+    private const float LEVEL_WAIT = 3.0f;
     bool not_instantiated = true;
     bool preemptive = false;
+    bool level_over = false;
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +39,7 @@ public class player_script : MonoBehaviour {
     void destroy_bang()
     {
         Destroy(bang_clone);
+        level_over = true;
     }
 
     void enemy_win()
@@ -42,6 +48,7 @@ public class player_script : MonoBehaviour {
         enemy_victor_clone = (GameObject)Instantiate(enemy_victor, enemy_victor_position, Quaternion.identity);
         Destroy(samurai_clone);
         Destroy(enemy_clone);
+        next_load = LOAD_OVER;
         //Application.LoadLevel(game_over);
     }
 
@@ -51,6 +58,7 @@ public class player_script : MonoBehaviour {
         enemy_corpse_clone = (GameObject) Instantiate(enemy_corpse, enemy_corpse_position, Quaternion.identity);
         Destroy(samurai_clone);
         Destroy(enemy_clone);
+        next_load = next_level;
         //Application.LoadLevel(next_level);
     }
 
@@ -78,6 +86,14 @@ public class player_script : MonoBehaviour {
                 destroy_bang();
                 print(reaction_timer);
             }
+        }
+
+        if (level_over)
+        {
+            load_wait_timer += Time.deltaTime;
+            
+            if(load_wait_timer > LEVEL_WAIT)
+                Application.LoadLevel(next_load);
         }
 	}
 }
