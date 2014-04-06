@@ -10,9 +10,8 @@ public class player_script : MonoBehaviour {
     public Vector3 bang_spawn_position, samurai_spawn_position, enemy_spawn_position;
     public Vector3 samurai_victor_position, samurai_corpse_position, enemy_victor_position, enemy_corpse_position;
     public float enemy_reaction;
-    public int next_level;
     private int next_load;
-    private const int LOAD_OVER = 2;
+    private const int LOAD_OVER = 1;
     float spawn_timer = 0.0f;
     float reaction_timer = 0.0f;
     float wait_time;
@@ -58,8 +57,13 @@ public class player_script : MonoBehaviour {
         enemy_corpse_clone = (GameObject) Instantiate(enemy_corpse, enemy_corpse_position, Quaternion.identity);
         Destroy(samurai_clone);
         Destroy(enemy_clone);
-        next_load = next_level;
+        next_load = Application.loadedLevel + 1;
         //Application.LoadLevel(next_level);
+    }
+
+    bool player_input()
+    {
+        return Input.GetKeyDown(KeyCode.Space);
     }
 
 	// Update is called once per frame
@@ -67,6 +71,10 @@ public class player_script : MonoBehaviour {
         if (not_instantiated)
         {
             spawn_timer += Time.deltaTime;
+            if (player_input())
+            {
+                preemptive = true;
+            }
 
             if (spawn_timer > wait_time)
             {
@@ -76,9 +84,9 @@ public class player_script : MonoBehaviour {
         else
         {
             reaction_timer += Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (player_input())
             {
-                if (reaction_timer > enemy_reaction)
+                if (reaction_timer > enemy_reaction || preemptive)
                     enemy_win();
                 else
                     player_win();
