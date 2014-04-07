@@ -63,7 +63,7 @@ public class player_script : MonoBehaviour {
 
     bool player_input()
     {
-        return Input.GetKeyDown(KeyCode.Space);
+        return Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0;
     }
 
 	// Update is called once per frame

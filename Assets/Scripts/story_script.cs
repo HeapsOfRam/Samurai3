@@ -25,17 +25,17 @@ public class story_script : MonoBehaviour
     void OnGUI()
     {
         //GUI.Label(new Rect(Screen.width / 2 - 40, 150, 80, 50), "Game Over");
-        if (GUI.Button(new Rect(Screen.width / 2 - start_button_x_pos, Screen.height / 2 - start_button_y_pos, button_x_size, button_y_size), "Start Game"))
+        if (GUI.Button(new Rect(Screen.width * start_button_x_pos, Screen.height * start_button_y_pos, button_x_size, button_y_size), "Start Game"))
         {
             Application.LoadLevel(BEGIN_LEVEL);
         }
 
-        if (GUI.Button(new Rect(Screen.width / 2 - menu_button_x_pos, Screen.height / 2 - menu_button_y_pos, button_x_size, button_y_size), "Back"))
+        if (GUI.Button(new Rect(Screen.width * menu_button_x_pos, Screen.height * menu_button_y_pos, button_x_size, button_y_size), "Back"))
         {
             Application.LoadLevel(MENU_LEVEL);
         }
 
-        if (GUI.Button(new Rect(Screen.width / 2 - instruction_button_x_pos, Screen.height / 2 - instruction_button_y_pos, button_x_size, button_y_size), "Instructions"))
+        if (GUI.Button(new Rect(Screen.width * instruction_button_x_pos, Screen.height * instruction_button_y_pos, button_x_size, button_y_size), "Instructions"))
         {
             Application.LoadLevel(INS_LEVEL);
         }
