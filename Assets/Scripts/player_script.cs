@@ -23,7 +23,7 @@ public class player_script : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        wait_time = Random.Range(3.0f, 20.0f);
+        wait_time = Random.Range(3.0f, 10.0f);
 
         samurai_clone = (GameObject)Instantiate(samurai, samurai_spawn_position, Quaternion.identity);
         enemy_clone = (GameObject)Instantiate(enemy, enemy_spawn_position, Quaternion.identity);
@@ -68,6 +68,9 @@ public class player_script : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
         if (not_instantiated)
         {
             spawn_timer += Time.deltaTime;
@@ -83,16 +86,20 @@ public class player_script : MonoBehaviour {
         }
         else
         {
-            reaction_timer += Time.deltaTime;
-            if (player_input())
+            if (!level_over)
             {
-                if (reaction_timer > enemy_reaction || preemptive)
-                    enemy_win();
-                else
-                    player_win();
+                if (player_input())
+                {
+                    if (reaction_timer > enemy_reaction || preemptive)
+                        enemy_win();
+                    else
+                        player_win();
 
-                destroy_bang();
-                print(reaction_timer);
+                    destroy_bang();
+                    //print(reaction_timer);
+                }
+                else
+                    reaction_timer += Time.deltaTime;
             }
         }
 
