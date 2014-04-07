@@ -1,24 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class menu_script : MonoBehaviour {
+public class story_script : MonoBehaviour
+{
 
     public float start_button_x_pos, start_button_y_pos;
-    public float story_button_x_pos, story_button_y_pos;
+    public float menu_button_x_pos, menu_button_y_pos;
     public float instruction_button_x_pos, instruction_button_y_pos;
-    private const int BEGIN_LEVEL = 4, STORY_LEVEL = 2, INS_LEVEL = 3;    
+    private const int BEGIN_LEVEL = 4, MENU_LEVEL = 0, INS_LEVEL = 3;    
     int button_x_size = 80;
     int button_y_size = 50;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    /*void Update () {
 	
-	}
-	
-	// Update is called once per frame
-	/*void Update () {
-	
-	}*/
+    }*/
 
     void OnGUI()
     {
@@ -28,9 +30,9 @@ public class menu_script : MonoBehaviour {
             Application.LoadLevel(BEGIN_LEVEL);
         }
 
-        if (GUI.Button(new Rect(Screen.width / 2 - story_button_x_pos, Screen.height / 2 - story_button_y_pos, button_x_size, button_y_size), "Story"))
+        if (GUI.Button(new Rect(Screen.width / 2 - menu_button_x_pos, Screen.height / 2 - menu_button_y_pos, button_x_size, button_y_size), "Back"))
         {
-            Application.LoadLevel(STORY_LEVEL);
+            Application.LoadLevel(MENU_LEVEL);
         }
 
         if (GUI.Button(new Rect(Screen.width / 2 - instruction_button_x_pos, Screen.height / 2 - instruction_button_y_pos, button_x_size, button_y_size), "Instructions"))
