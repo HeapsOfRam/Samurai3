@@ -33,6 +33,7 @@ public class player_script : MonoBehaviour {
     {
         not_instantiated = false;
         bang_clone = (GameObject) Instantiate(bang, bang_spawn_position, Quaternion.identity);
+        audio.Play();
     }
 
     void destroy_bang()
